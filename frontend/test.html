@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>API Connection Test</h1>
+    <button onclick="testConnection()">Test API Connection</button>
+    <div id="result"></div>
+
+    <script>
+        async function testConnection() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/categories/');
+                result.innerHTML = `<p style="color: green;">Success! Categories endpoint working.</p><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+            } catch (error) {
+                result.innerHTML = `<p style="color: red;">Error: ${error.message}</p><p>Make sure Django server is running on port 8000</p>`;
+                console.error('Full error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
